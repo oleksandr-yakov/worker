@@ -3,7 +3,7 @@ name: Print Tag
 on:
   workflow_dispatch:
     inputs:
-      new_variable: 
+      new_core_tag: 
         description: 'New variable for the action'
         required: true
 
@@ -11,6 +11,17 @@ jobs:
   print_tag:
     runs-on: ubuntu-latest
     steps:
+  
+    - name: Clone repository
+      uses: actions/checkout@v4
+
     - name: Print Tag
       run: |
-        echo "New variable: ${{ github.event.inputs.new_variable }}"
+        echo "New variable: ${{ github.event.inputs.new_core_tag }}"
+        
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Docker build
+      run: |
+        docker build --build-arg ALPINE_VERSION=3.19 -t my_image . --load
