@@ -1,0 +1,16 @@
+name: Print Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag for the action'
+        required: true
+
+jobs:
+  print_tag:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print Tag
+      run: |
+       echo "Received tag: ${{ github.event.inputs.tag }}"
