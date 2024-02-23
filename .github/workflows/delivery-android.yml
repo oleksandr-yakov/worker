@@ -3,8 +3,8 @@ name: Print Tag
 on:
   workflow_dispatch:
     inputs:
-      tag:
-        description: 'Tag for the action'
+      new_variable: 
+        description: 'New variable for the action'
         required: true
 
 jobs:
@@ -13,4 +13,4 @@ jobs:
     steps:
     - name: Print Tag
       run: |
-       echo "Received tag: ${{ github.event.inputs.tag }}"
+        echo "New variable: ${{ github.event.inputs.new_variable }}"
