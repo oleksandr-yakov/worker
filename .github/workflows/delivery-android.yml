@@ -19,7 +19,7 @@ jobs:
 
     - name: Set Environment Variable ENV
       run: |
-        python3 CreateTag.py
+        python3 CreateTag.py ${{ secrets.GAT_TAG }}
         
         
     - name: Set up Docker Buildx

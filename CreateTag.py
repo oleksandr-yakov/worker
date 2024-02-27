@@ -25,11 +25,7 @@ def find_max_tag(repository_name, token):
 
 
 if __name__ == "__main__":
-    repository_name = "oleksandr-yakov/core"           # "oversecured/core_"
-    token = "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"                 #       sys.argv[1]     # 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
-    #platform = sys.argv[2]
-    #repository_name += platform
-
+    repository_name = "oleksandr-yakov/core"
+    token = sys.argv[1]
     max_tag = find_max_tag(repository_name, token)
-    #print(f"The max core {repository_name} tag is:", max_tag)
     print(max_tag)
