@@ -19,8 +19,8 @@ jobs:
 
     - name: Set Environment Variable ENV
       run: |
-        ENV=$(python3 CreateTag.py)
-        echo "LAST_CORE_TAG=$ENV" >> $GITHUB_ENV
+        python3 CreateTag.py
+        
         
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
