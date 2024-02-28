@@ -29,7 +29,7 @@ def find_max_tag(repository_name, token):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python3 GetTag.py <option> <token_or_tag>")
+        print(False)
         sys.exit(0)
 
     option = sys.argv[1]
