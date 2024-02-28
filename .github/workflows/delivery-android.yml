@@ -39,7 +39,7 @@ jobs:
             exit 1
           fi          
 
-      - name: Print All data
+      - name: Print All Useful data
         run: |
           echo "ENV: ${{ env.ENV }}"
           echo "CORE_TAG: ${{ env.CORE_TAG }}"
