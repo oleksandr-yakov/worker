@@ -5,7 +5,7 @@ on:
     branches: [ main, dev ]
   workflow_dispatch:
     inputs:
-      new_core_tag: 
+      new_core_tag:
         description: 'New variable for the action'
         required: false
 
@@ -28,8 +28,8 @@ jobs:
           echo "VALID_TAG=${{ env.VALID_TAG }}"
 
       - name: Set Environment Variable ENV
-        run: |  
-          if [ ${{ env.VALID_TAG }} == "True" ]; then
+        run: |
+          if [ "${{ env.VALID_TAG }}" == "True" ]; then
             echo "ENV=prod" >> $GITHUB_ENV
             echo $CORE_TAG
             echo "triggered from tag from core"
@@ -42,10 +42,3 @@ jobs:
             echo "CORE_TAG=$(python3 GetTag.py --get_max_tag ${{ secrets.GET_TAG }})" >> $GITHUB_ENV   
             echo "triggered from push main"
           fi          
-
-      - name: Print GET_TAG as last tag core
-        run: |
-          echo "Name from CORE_TAG: $CORE_TAG"
-          echo "ENV is: $ENV"
-
-
