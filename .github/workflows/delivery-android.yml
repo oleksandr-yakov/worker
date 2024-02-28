@@ -24,7 +24,6 @@ jobs:
         run: |
           if [ "$(python3 GetTag.py --check_tag ${{ env.CORE_TAG }})" == "True" ]; then
             echo "ENV=prod" >> $GITHUB_ENV
-            echo $CORE_TAG
             echo "INFO --- [   trigger   ] : triggered by new tag core"
           elif [ "${{ github.ref }}" == "refs/heads/dev" ] || [ "${{ env.CORE_TAG }}" == "latest" ]; then
             echo "CORE_TAG=latest" >> $GITHUB_ENV
