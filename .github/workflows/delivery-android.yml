@@ -30,7 +30,8 @@ jobs:
 
       - name: Set Environment Variable ENV
         run: |
-          if [ python3 -c "import re; assert re.match('^v[0-9]+\.[0-9]+\.[0-9]+$', '${{ env.CORE_TAG }}'), 'Invalid version string'" ]; then
+          $CHECK_CORE_TAG=$(python3 -c "import re; assert re.match('^v[0-9]+\.[0-9]+\.[0-9]+$', '${{ env.CORE_TAG }}'), 'Invalid version string'")
+          if [ "${{ env.CORE_TAG }}" != "Invalid version string" ]; then
             echo "ENV=prod" >> $GITHUB_ENV
             echo $CORE_TAG
             echo "triggered from tag from core"
