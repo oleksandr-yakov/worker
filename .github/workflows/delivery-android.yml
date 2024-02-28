@@ -31,7 +31,7 @@ jobs:
 
       - name: Set Environment Variable ENV
         run: |  
-          if [ "${{ env.TAG_VALID }}" ]; then
+          if [ "${{ env.TAG_VALID }}" == "True" ]; then
             echo "ENV=prod" >> $GITHUB_ENV
             echo $CORE_TAG
             echo "triggered from tag from core"
