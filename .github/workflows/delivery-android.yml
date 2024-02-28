@@ -11,8 +11,6 @@ on:
 
 env:
   CORE_TAG: ${{ github.event.inputs.new_core_tag }}
-  OLD_CORE_TAG: $(python3 GetTag.py --get_max_tag ${{ secrets.GET_TAG }})
-  TAG_VALID: $(python3 GetTag.py --check_tag ${{ env.CORE_TAG }})
 
 jobs:
   print_tag:
@@ -24,7 +22,8 @@ jobs:
       - name: Print github.ref
         run: |
           echo "Name from  github.ref : ${{ github.ref }}"
-
+          echo "OLD_CORE_TAG=$(python3 GetTag.py --get_max_tag ${{ secrets.GET_TAG }})" >> $GITHUB_ENV
+          echo "TAG_VALID=$(python3 GetTag.py --check_tag ${{ env.CORE_TAG }})" >> $GITHUB_ENV
 
       - name: Print oldest TAG core
         run: |
