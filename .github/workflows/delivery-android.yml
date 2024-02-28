@@ -22,15 +22,15 @@ jobs:
       - name: Print github.ref
         run: |
           echo "Name from  github.ref : ${{ github.ref }}"
-          echo "OLD_CORE_TAG=$(python3 GetTag.py --get_max_tag ${{ secrets.GET_TAG }})" >> $GITHUB_ENV  
+          echo "OLD_CORE_TAG=$(python3 GetTag.py --get_max_tag ${{ secrets.GET_TAG }})" >> $GITHUB_ENV
+          echo "TAG_VALID=$(python3 GetTag.py --check_tag ${{ env.CORE_TAG }})" >> $GITHUB_ENV
 
       - name: Print oldest TAG core
         run: |
           echo "Name from  OLD_CORE_TAG : $OLD_CORE_TAG"
 
       - name: Set Environment Variable ENV
-        run: |
-          echo "TAG_VALID=$(python3 GetTag.py --check_tag ${{ env.CORE_TAG }})" >> $GITHUB_ENV  
+        run: |  
           if [ "${{ env.TAG_VALID }}" ]; then
             echo "ENV=prod" >> $GITHUB_ENV
             echo $CORE_TAG
