@@ -9,6 +9,9 @@ on:
         description: 'New variable for the action'
         required: false
 
+env:
+  CORE_TAG: ${{ github.event.inputs.new_core_tag }}
+
 jobs:
   print_tag:
     runs-on: ubuntu-latest
@@ -21,12 +24,15 @@ jobs:
           if [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "ENV=prod" >> $GITHUB_ENV
             echo "CORE_TAG=$(python3 GetTag.py ${{ secrets.GET_TAG }})" >> $GITHUB_ENV   
+            echo "triggered from  push main"
           elif [ "${{ github.ref }}" == "refs/heads/dev" ] || [ "${{ env.CORE_TAG }}" == "latest" ]; then
             echo "CORE_TAG=latest" >> $GITHUB_ENV
             echo "ENV=dev" >> $GITHUB_ENV
+            echo "triggered from tag from push dev or latest from core"
           elif [ 'python3 -c "import re; exit(0 if re.match('^v[0-9]+\.[0-9]+\.[0-9]+$', '${{ env.CORE_TAG }}') else 1)"' ]; then
             echo "ENV=prod" >> $GITHUB_ENV
             echo $CORE_TAG
+            echo "triggered from tag from core"
           fi
 
       - name: Print GET_TAG as last tag core
