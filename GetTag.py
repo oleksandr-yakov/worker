@@ -2,6 +2,9 @@ import requests
 import sys
 import re
 
+def check_tag(tag):
+    pattern = r'^v\d+\.\d+\.\d+$'
+    return bool(re.match(pattern, tag))
 
 def find_max_tag(repository_name, token):
     headers = {"Authorization": f"token {token}"}
@@ -23,9 +26,21 @@ def find_max_tag(repository_name, token):
         print("An error occurred:", e)
         return None
 
-
 if __name__ == "__main__":
-    repository_name = "oleksandr-yakov/core"
-    token = sys.argv[1]
-    max_tag = find_max_tag(repository_name, token)
-    print(max_tag)
+    if len(sys.argv) != 3:
+        print("Usage: python3 GetTag.py <option> <token_or_tag>")
+        sys.exit(1)
+
+    option = sys.argv[1]
+    argument = sys.argv[2]
+
+    if option == "--check_tag":
+        is_valid = check_tag(argument)
+        print(is_valid)
+    elif option == "--get_max_tag":
+        repository_name = "oleksandr-yakov/core"
+        max_tag = find_max_tag(repository_name, argument)
+        print(max_tag)
+    else:
+        print("Invalid option")
+        sys.exit(1)
