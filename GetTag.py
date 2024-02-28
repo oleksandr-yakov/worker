@@ -26,6 +26,7 @@ def find_max_tag(repository_name, token):
         print("An error occurred:", e)
         return None
 
+
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: python3 GetTag.py <option> <token_or_tag>")

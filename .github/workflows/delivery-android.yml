@@ -22,7 +22,7 @@ jobs:
       - name: Print github.ref
         run: |
           echo "Name from  github.ref : ${{ github.ref }}"
-          echo "OLD_CORE_TAG=$(python3 GetTag.py ${{ secrets.GET_TAG }})" >> $GITHUB_ENV  
+          echo "OLD_CORE_TAG=$(python3 GetTag.py --get_max_tag ${{ secrets.GET_TAG }})" >> $GITHUB_ENV  
 
       - name: Print oldest TAG core
         run: |
