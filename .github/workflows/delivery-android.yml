@@ -21,10 +21,6 @@ jobs:
           if [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "ENV=prod" >> $GITHUB_ENV
             echo "CORE_TAG=$(python3 GetTag.py ${{ secrets.GET_TAG }})" >> $GITHUB_ENV   
-          elif [ "${{ github.ref }}" == "refs/heads/dev" ] || [ "${{ env.CORE_TAG }}" == "latest" ]; then
-        # for case when code push to dev (CORE_TAG=None)  CORE_TAG needed to init
-            echo "CORE_TAG=latest" >> $GITHUB_ENV
-            echo "ENV=dev" >> $GITHUB_ENV
           fi
 
       - name: Print GET_TAG as last tag core
