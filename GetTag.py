@@ -29,7 +29,7 @@ def find_max_tag(repository_name, token):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        sys.exit(1)
+        print(False)
 
     option = sys.argv[1]
     argument = sys.argv[2]
