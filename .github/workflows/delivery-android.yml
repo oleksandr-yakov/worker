@@ -35,7 +35,6 @@ jobs:
             echo "triggered from  push main"
           fi          
 
-
       - name: Print GET_TAG as last tag core
         run: |
           echo "Name from CORE_TAG: $CORE_TAG"
