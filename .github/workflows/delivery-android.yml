@@ -19,6 +19,14 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v4
 
+      - name: Set VALID_TAG
+        run: |
+          echo "VALID_TAG=$(python3 GetTag.py --check_tag ${{ env.CORE_TAG }})" >> $GITHUB_ENV
+
+      - name: Print VALID_TAG
+        run: |
+          echo "VALID_TAG=${{ env.VALID_TAG }}"
+
       - name: Set Environment Variable ENV
         run: |  
           if [ $(python3 GetTag.py --check_tag ${{ env.CORE_TAG }}) == "True" ]; then
