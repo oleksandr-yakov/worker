@@ -25,11 +25,11 @@ jobs:
             echo "ENV=prod" >> $GITHUB_ENV
             echo $CORE_TAG
             echo "triggered from tag from core"
-          elif [ "${{ github.ref }}" == "refs/heads/dev" ] || [ "${{ env.CORE_TAG }}" == "latest" ]; then
+          elif [ "${{ github.ref }}" == "refs/heads/dev" ] || [ "${{ env.CORE_TAG }}" == "latest" && ] && [ $(python3 GetTag.py --check_tag ${{ env.CORE_TAG }}) != "Wrong Tag" ]; then
             echo "CORE_TAG=latest" >> $GITHUB_ENV
             echo "ENV=dev" >> $GITHUB_ENV
             echo "triggered from tag from push dev or latest from core"
-          elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          elif [ "${{ github.ref }}" == "refs/heads/main" ] && [ $(python3 GetTag.py --check_tag ${{ env.CORE_TAG }}) != "Wrong Tag" ]; then
             echo "ENV=prod" >> $GITHUB_ENV
             echo "CORE_TAG=$(python3 GetTag.py --get_max_tag ${{ secrets.GET_TAG }})" >> $GITHUB_ENV   
             echo "triggered from  push main"
