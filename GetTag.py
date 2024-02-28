@@ -2,9 +2,11 @@ import requests
 import sys
 import re
 
+
 def check_tag(tag):
     pattern = r'^v\d+\.\d+\.\d+$'
     return bool(re.match(pattern, tag))
+
 
 def find_max_tag(repository_name, token):
     headers = {"Authorization": f"token {token}"}
@@ -14,7 +16,7 @@ def find_max_tag(repository_name, token):
         response = requests.get(url, headers=headers)
         response.raise_for_status()
 
-        tags = [tag["name"] for tag in response.json()]
+        tags = [tag["name"] for tag in response.json() if tag["name"].startswith("v")]
 
         def tag_to_tuple(tag):
             return tuple(map(int, re.findall(r'\d+', tag)))
