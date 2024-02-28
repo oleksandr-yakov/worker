@@ -2,7 +2,7 @@ name: Print Tag
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
   workflow_dispatch:
     inputs:
       new_core_tag: 
@@ -22,6 +22,11 @@ jobs:
       - name: Print github.ref
         run: |
           echo "Name from  github.ref : ${{ github.ref }}"
+          echo "OLD_CORE_TAG=$(python3 GetTag.py ${{ secrets.GET_TAG }})" >> $GITHUB_ENV  
+
+      - name: Print oldest TAG core
+        run: |
+          echo "Name from  OLD_CORE_TAG : $OLD_CORE_TAG"
 
       - name: Set Environment Variable ENV
         run: |
