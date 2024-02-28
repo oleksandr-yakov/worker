@@ -19,9 +19,23 @@ jobs:
 
     - name: Set Environment Variable ENV
       run: |
-        echo "LAST_CORE_TAG=$(python3 CreateTag.py ${{ secrets.GAT_TAG }})" >> $GITHUB_ENV
-        
-        
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          echo "ENV=prod" >> $GITHUB_ENV
+          echo "CORE_TAG=$(python3 GetTag.py ${{ secrets.GET_TAG }})" >> $GITHUB_ENV   
+        elif [ "${{ github.ref }}" == "refs/heads/dev" ] || [ "${{ env.CORE_TAG }}" == "latest" ]; then
+      # for case when code push to dev (CORE_TAG=None)  CORE_TAG needed to init
+          echo "CORE_TAG=latest" >> $GITHUB_ENV
+          echo "ENV=dev" >> $GITHUB_ENV
+        elif [ "${{ env.CORE_TAG }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]; then
+          echo "ENV=prod" >> $GITHUB_ENV
+          echo $CORE_TAG
+        fi
+
+
+    - name: Print GET_TAG as last tag core
+      run: |
+        echo "Name from GET_TAG: $GET_TAG"
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
