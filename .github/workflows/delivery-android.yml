@@ -47,11 +47,11 @@ jobs:
 
       - name: Print GET_TAG as last tag core
         run: |
-          echo "Name from GET_TAG: $CORE_TAG"
+          echo "Name from CORE_TAG: $CORE_TAG"
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Docker build
-        run: |
-          docker build --build-arg ALPINE_VERSION=$LAST_CORE_TAG -t my_image . --load
+#      - name: Set up Docker Buildx
+#        uses: docker/setup-buildx-action@v3
+#
+#      - name: Docker build
+#        run: |
+#          docker build --build-arg ALPINE_VERSION=$LAST_CORE_TAG -t my_image . --load
