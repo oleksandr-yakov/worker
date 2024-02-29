@@ -1,5 +1,5 @@
+import argparse
 import requests
-import sys
 import re
 
 
@@ -29,21 +29,31 @@ def find_max_tag(repository_name, token):
         return None
 
 
-if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Wrong Tag")
-        sys.exit(0)
+def main():
+    parser = argparse.ArgumentParser(description="Utility for checking tags on GitHub repository")
+    parser.add_argument("--check_tag", metavar="TAG", type=str, nargs='?', const='', help="Check if a tag follows the format v#.#.#")
+    parser.add_argument("--get_max_tag", action="store_true", help="Find the maximum tag on a GitHub repository")
+    parser.add_argument("--repo", metavar="REPO", type=str, help="GitHub repository name in the format 'owner/repo'")
+    parser.add_argument("--token", metavar="TOKEN", type=str, help="GitHub personal access token")
 
-    option = sys.argv[1]
-    argument = sys.argv[2]
+    args = parser.parse_args()
 
-    if option == "--check_tag":
-        is_valid = check_tag(argument)
+    if args.check_tag is not None:
+        if not args.check_tag:
+            print("Wrong Tag")
+            return
+        is_valid = check_tag(args.check_tag)
         print(is_valid)
-    elif option == "--get_max_tag":
-        repository_name = "oleksandr-yakov/core"
-        max_tag = find_max_tag(repository_name, argument)
+    elif args.get_max_tag:
+        if not args.repo or not args.token:
+            parser.error("--get_max_tag requires --repo and --token.")
+        owner = "oleksandr-yakov/"
+        repo_name = owner + args.repo
+        max_tag = find_max_tag(repo_name, args.token)
         print(max_tag)
     else:
-        print("Invalid option")
-        sys.exit(1)
+        parser.print_help()
+
+
+if __name__ == "__main__":
+    main()
