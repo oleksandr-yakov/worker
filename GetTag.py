@@ -19,7 +19,7 @@ def find_max_tag(repository_name, token):
         response = requests.get(url, headers=headers)
         response.raise_for_status()
 
-        tags = [tag["name"] for tag in response.json() if tag["name"].startswith("v")]
+        tags = [tag["name"] for tag in response.json() if re.match(r'^v\d+\.\d+\.\d+$', tag["name"])]
 
         def tag_to_tuple(tag):
             return tuple(map(int, re.findall(r'\d+', tag)))
