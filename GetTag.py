@@ -5,7 +5,7 @@ import json
 OWNER = "oleksandr-yakov/"
 WORKER_REPO = "worker"
 
-
+# dav
 def check_tag(tag):
     pattern = r'^v\d+\.\d+\.\d+$'
     return bool(re.match(pattern, tag))
