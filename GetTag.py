@@ -3,7 +3,7 @@ import requests
 import re
 import json
 OWNER = "oleksandr-yakov/"
-WORKER_REPO = "worker-on-premise"
+WORKER_REPO = "worker"
 
 
 def check_tag(tag):
