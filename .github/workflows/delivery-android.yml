@@ -30,6 +30,7 @@ jobs:
             echo "VERSION=latest" >> $GITHUB_ENV
           fi        
 
+
       - name: Print All Useful data
         run: |
           echo "ENV: ${{ env.ENV }}"
