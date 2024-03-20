@@ -33,5 +33,5 @@ jobs:
       - name: Print All Useful data
         run: |
           echo "ENV: ${{ env.ENV }}"
-          echo "CORE_TAG: ${{ env.CORE_TAG }}"
+          echo "VERSION: ${{ env.VERSION }}"
           echo "TAG_MANIFEST: ${{ env.TAG_MANIFEST }}"
