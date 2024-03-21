@@ -3,15 +3,6 @@ name: Print Tag
 on:
   push:
     branches: [ main, dev ]
-  workflow_dispatch:
-    inputs:
-      new_core_tag:
-        description: 'New variable for the action'
-        required: false
-
-env:
-  CORE_TAG: ${{ github.event.inputs.new_core_tag }}
-  TAG_MANIFEST: latest
 
 jobs:
   print_tag:
