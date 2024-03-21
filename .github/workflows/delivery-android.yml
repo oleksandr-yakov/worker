@@ -5,6 +5,9 @@ on:
     branches: [ main, dev ]
   workflow_dispatch:
 
+env:
+  TAG_MANIFEST: latest
+
 jobs:
   print_tag:
     runs-on: ubuntu-latest
